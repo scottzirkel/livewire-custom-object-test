@@ -24,17 +24,7 @@ class ComponentB extends Component
     public function dispatchThing()
     {
         $this->address->street = '556 Street';
-        $this->dispatch('run-action', $this->address);
-    }
-
-    #[On('run-action')]
-    public function dispatchedEvent(Address $address)
-    {
-        //        dd($address);
-        //        dd(debug_backtrace());
-        //        dump('fin', $address);
-        //        $address['city'] = 'Town';
-        //        $this->address = new Address();
+        $this->dispatch('run-action', $this->address)->to(ComponentC::class);
     }
 
     public function render()

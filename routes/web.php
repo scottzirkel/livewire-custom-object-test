@@ -2,6 +2,7 @@
 
 use App\Livewire\ComponentA;
 use App\Livewire\ComponentB;
+use App\Livewire\ComponentD;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,5 @@ Route::get('/', function () {
 Route::get('a', ComponentA::class);
 
 Route::get('b', ComponentB::class);
+
+Route::get('d', ComponentD::class);

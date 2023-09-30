@@ -15,8 +15,6 @@ class AddressSynth extends Synth
 
     public function dehydrate($target)
     {
-        //        dump('dehydrate', $target);
-
         return [[
             'street' => $target->street,
             'city' => $target->city,
@@ -27,10 +25,9 @@ class AddressSynth extends Synth
 
     public function hydrate($value)
     {
-        //        dump($value);
         $instance = new Address;
 
-        $instance->street = $value['city'];
+        $instance->street = $value['street'];
         $instance->city = $value['city'];
         $instance->state = $value['state'];
         $instance->zip = $value['zip'];
@@ -40,14 +37,11 @@ class AddressSynth extends Synth
 
     public function get(&$target, $key)
     {
-        dump('get');
-
         return $target->{$key};
     }
 
     public function set(&$target, $key, $value)
     {
-        dump('set');
         $target->{$key} = $value;
     }
 }
