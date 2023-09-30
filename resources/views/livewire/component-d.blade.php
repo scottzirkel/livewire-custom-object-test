@@ -1,4 +1,5 @@
 <form wire:submit="save">
+    @dump($errors->toArray())
     <div>
         <input wire:model="form.title" />
         <div>@error('form.title') {{ $message }} @enderror</div>
@@ -6,6 +7,8 @@
     <div>
         <input wire:model="form.address.street" />
         <div>@error('form.address.street') {{ $message }} @enderror</div>
+        <div>@error('address.street') {{ $message }} @enderror</div>
+        <div>@error('street') {{ $message }} @enderror</div>
     </div>
     <div>
         <input wire:model="form.address.city" />

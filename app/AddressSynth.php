@@ -2,11 +2,46 @@
 
 namespace App;
 
+use Livewire\Attributes\Rule;
+use Livewire\Mechanisms\HandleComponents\ComponentContext;
 use Livewire\Mechanisms\HandleComponents\Synthesizers\Synth;
+use ReflectionClass;
 
 class AddressSynth extends Synth
 {
     public static $key = 'address';
+
+    public function __construct(ComponentContext $context, $path)
+    {
+        $reflectionClass = new ReflectionClass(Address::class);
+        $rules = collect($reflectionClass->getProperties())->flatMap(function ($property) {
+            $attributes = $property->getAttributes(Rule::class);
+            $key = 'form.'.self::$key.'.'.$property->name;
+            if (empty($attributes)) {
+                return false;
+            }
+            $rules = $attributes[0]->getArguments();
+
+            if (empty($rules)) {
+                return false;
+            }
+
+            if (is_array($rules[0])) {
+                $rules = implode(',', $rules[0]);
+            }
+
+            return [$key => $rules];
+        })->filter()->toArray();
+
+        $address = new Address;
+        if ($rules) {
+            $context->component->addRulesFromOutside($rules);
+        }
+
+        $context->component->addValidationAttributesFromOutside($address->attributes());
+        $context->component->addMessagesFromOutside($address->messages());
+        parent::__construct($context, $path);
+    }
 
     public static function match($target)
     {

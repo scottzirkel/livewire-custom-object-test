@@ -23,7 +23,7 @@ class ComponentD extends Component
     public function mount()
     {
         $address = new Address;
-        $address->street = '4555 Street';
+        $address->street = '';
         $address->city = 'Town';
         $address->state = 'State';
         $address->zip = 'zip';

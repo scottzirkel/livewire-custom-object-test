@@ -13,6 +13,11 @@ class AddressForm extends Form
 
     public Address $address;
 
+    public function rules()
+    {
+        return ['title' => 'required'];
+    }
+
     public function setAddress(Address $address)
     {
         $this->address = $address;
@@ -21,11 +26,24 @@ class AddressForm extends Form
 
     public function update()
     {
+        //        dd($this);
+        //
+        //        dd($this->component);
+        //        $this->component->addRulesFromOutside(function () {
+        //            $rules = [];
+        //
+        //            if (method_exists($this, 'rules')) {
+        //                $rules = $this->rules();
+        //            } elseif (property_exists($this, 'rules')) {
+        //                $rules = $this->rules;
+        //            }
+        //
+        //            return $this->getAttributesWithPrefixedKeys($rules);
+        //        });
         // Both validations work, but if there's a failure in the first,
         // it doesn't run the object validation, so it ends up as a multi-stage validation
         // Not great, especially if you have multiple DTOs...
-
         $this->validate();
-        $this->address->validate($this);
+        //        $this->address->validate($this);
     }
 }

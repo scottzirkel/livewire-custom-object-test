@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Support\Facades\Validator;
+use Livewire\Attributes\Rule;
 
 class Address
 {
-    public string $street;
+    #[Rule(['required, min:3'])]
+    public string $street = '';
 
+    #[Rule('required')]
     public $city = '';
 
     public $state = '';
@@ -33,6 +36,21 @@ class Address
         $instance->zip = $value['zip'];
 
         return $instance;
+    }
+
+    //    public function rules()
+    //    {
+    //        return ['form.address.street' => 'required|min:3'];
+    //    }
+
+    public function attributes()
+    {
+        return ['form.address.street' => 'street'];
+    }
+
+    public function messages()
+    {
+        return ['required' => 'The :attribute field is required'];
     }
 
     public function validate($formData)
