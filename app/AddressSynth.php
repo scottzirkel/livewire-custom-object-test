@@ -26,8 +26,20 @@ class AddressSynth extends Synth
                 return false;
             }
 
+            if (is_string($rules[0])) {
+                $rules = $rules[0];
+            }
+
             if (is_array($rules[0])) {
-                $rules = implode(',', $rules[0]);
+                $rules = implode('|', $rules[0]);
+            }
+
+            if (property_exists($property, 'rules')) {
+                dd('merge in rules property array');
+            }
+
+            if (method_exists($property, 'rules')) {
+                dd('merge in rules method');
             }
 
             return [$key => $rules];

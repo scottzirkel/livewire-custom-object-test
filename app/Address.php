@@ -2,16 +2,15 @@
 
 namespace App;
 
-use Illuminate\Support\Facades\Validator;
 use Livewire\Attributes\Rule;
 
 class Address
 {
-    #[Rule(['required, min:3'])]
+    #[Rule(['required|min:3'])]
     public string $street = '';
 
     #[Rule('required')]
-    public $city = '';
+    public string $city = '';
 
     public $state = '';
 
@@ -45,7 +44,7 @@ class Address
 
     public function attributes()
     {
-        return ['form.address.street' => 'street'];
+        return ['form.address.street' => 'street', 'form.address.city' => 'city'];
     }
 
     public function messages()
@@ -53,19 +52,19 @@ class Address
         return ['required' => 'The :attribute field is required'];
     }
 
-    public function validate($formData)
-    {
-        return Validator::make(
-            // Data to validate...
-            ['form.address.street' => $formData->street],
-
-            // Validation rules to apply...
-            ['form.address.street' => 'required|min:3'],
-
-            // Custom validation messages...
-            ['required' => 'The :attribute field is required'],
-
-            ['form.address.street' => 'street']
-        )->validate();
-    }
+    //    public function validate($formData)
+    //    {
+    //        return Validator::make(
+    //            // Data to validate...
+    //            ['form.address.street' => $formData->street],
+    //
+    //            // Validation rules to apply...
+    //            ['form.address.street' => 'required|min:3'],
+    //
+    //            // Custom validation messages...
+    //            ['required' => 'The :attribute field is required'],
+    //
+    //            ['form.address.street' => 'street']
+    //        )->validate();
+    //    }
 }

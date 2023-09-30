@@ -8,15 +8,10 @@ use Livewire\Form;
 
 class AddressForm extends Form
 {
-    #[Rule('required')]
+    #[Rule('required|min:3')]
     public string $title;
 
     public Address $address;
-
-    public function rules()
-    {
-        return ['title' => 'required'];
-    }
 
     public function setAddress(Address $address)
     {
@@ -26,7 +21,7 @@ class AddressForm extends Form
 
     public function update()
     {
-        //        dd($this);
+
         //
         //        dd($this->component);
         //        $this->component->addRulesFromOutside(function () {
