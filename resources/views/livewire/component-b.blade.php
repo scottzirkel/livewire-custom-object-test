@@ -1,3 +1,4 @@
 <div>
-    {{ $object->name }}
+    @dump($address)
+    <button wire:click="dispatchThing">Click to update</button>
 </div>

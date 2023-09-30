@@ -15,12 +15,14 @@ class ComponentA extends Component
 
         $object->name = 'updated name';
         $this->dispatch('object-updated', $object);
+
     }
 
     #[On('object-updated')]
-    public function setObject($object)
+    public function setObject(WireableObject $object)
     {
-        dd(gettype($object));
+        $this->object = $object;
+        //        dd(gettype($object), $object);
     }
 
     public function render(): View
